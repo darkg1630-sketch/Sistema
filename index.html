@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a0e1a">
+  <meta name="description" content="SYSTEM AWAKENING — seu sistema pessoal de evolução física.">
+  <title>SYSTEM AWAKENING // BETA 1.5</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-512.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark">SA</div><div><div class="brand-name">SYSTEM <span>AWAKENING</span></div><div class="brand-sub">PERSONAL EVOLUTION PROTOCOL</div></div></div>
+    <div class="version">BETA 1.5</div>
+  </header>
+  <main class="app-shell">
+    <section class="hero panel">
+      <div class="eyebrow"><span class="pulse"></span> SISTEMA ONLINE <span id="todayLabel"></span></div>
+      <h1>DESPERTAR DO<br><span>CAÇADOR</span></h1>
+      <p>O poder não aparece. É construído, missão por missão.</p>
+      <div class="hero-actions"><button class="btn primary" id="quickQuestBtn">▶ INICIAR MISSÃO</button><button class="btn ghost" id="installBtn" hidden>＋ INSTALAR APP</button></div>
+    </section>
+
+    <nav class="tabs" aria-label="Seções">
+      <button class="tab active" data-tab="status">STATUS</button>
+      <button class="tab" data-tab="quests">MISSÕES</button>
+      <button class="tab" data-tab="training">TREINO</button>
+      <button class="tab" data-tab="progress">PROGRESSO</button>
+      <button class="tab" data-tab="inventory">INVENTÁRIO</button>
+    </nav>
+
+    <section class="view active" id="view-status">
+      <div class="section-head"><div><div class="eyebrow">PLAYER STATUS</div><h2>Ficha do Caçador</h2></div><span class="rank" id="rankBadge">RANK E</span></div>
+      <div class="status-grid">
+        <article class="panel stat-card wide"><div class="stat-label">CAÇADOR</div><div class="player-line"><div class="avatar">影</div><div><div class="player-name" id="playerNameText">JOGADOR</div><div class="muted">Classe: Desperto em evolução</div></div><button class="mini-btn" id="editProfileBtn" aria-label="Editar perfil">✎</button></div><div class="level-row"><span>NÍVEL <b id="levelText">1</b></span><span><b id="xpText">0</b> / <b id="nextXpText">100</b> XP</span></div><div class="xp-track"><div id="xpFill"></div></div><div class="muted small" id="levelMessage">Toda evolução começa com uma missão.</div></article>
+        <article class="panel stat-card"><div class="stat-label">PESO ATUAL</div><div class="big-value"><span id="weightText">82,0</span><small>kg</small></div><div class="muted small">Meta: <span id="goalWeightText">75,0</span> kg</div><button class="text-btn" id="addWeightBtn">＋ Registrar peso</button></article>
+        <article class="panel stat-card"><div class="stat-label">IMC ESTIMADO</div><div class="big-value" id="bmiText">25,3</div><div class="muted small" id="bmiLabel">Referência adulta</div><button class="text-btn" id="editHeightBtn">Altura: <span id="heightText">180</span> cm</button></article>
+      </div>
+      <div class="section-head compact"><div><div class="eyebrow">DAILY QUEST</div><h2>Missões de hoje</h2></div><button class="text-btn" data-goto="quests">Ver todas →</button></div>
+      <div id="dailyPreview" class="quest-list"></div>
+      <div class="notice"><span>ⓘ</span><p>Missões são sugestões. Ajuste água, atividade e descanso ao seu corpo. Nenhuma punição física é aplicada automaticamente.</p></div>
+    </section>
+
+    <section class="view" id="view-quests">
+      <div class="section-head"><div><div class="eyebrow">QUEST BOARD</div><h2>Quadro de missões</h2></div><span class="date-pill" id="questDate"></span></div>
+      <div class="quest-summary panel"><div><span class="muted">PROGRESSO DO DIA</span><strong id="questProgressText">0 / 5</strong></div><div class="progress-track"><div id="questProgressFill"></div></div><div class="muted small">Conclua o que for seguro e possível. XP é recompensa, não medida do seu valor.</div></div>
+      <div id="questList" class="quest-list"></div>
+      <div id="penaltyCard" class="panel penalty-card" hidden><div class="eyebrow">PENALTY QUEST · OPCIONAL</div><h3>Missão de recuperação</h3><p>Escolha uma ação leve para retomar o ritmo: 5 minutos de mobilidade, organizar sua garrafa de água ou planejar o próximo treino.</p><button class="btn ghost" id="penaltyCompleteBtn">Concluir missão leve · +10 XP</button></div>
+      <button class="btn ghost full" id="resetDailyBtn">↻ Reiniciar missões de hoje</button>
+    </section>
+
+    <section class="view" id="view-training">
+      <div class="section-head"><div><div class="eyebrow">TRAINING PROTOCOL</div><h2>Treino em casa</h2></div><span class="rank">SEM EQUIPAMENTO</span></div>
+      <div class="panel timer-panel"><div class="eyebrow">CRONÔMETRO DE TREINO</div><div class="timer" id="timerText">00:00</div><div class="timer-controls"><button class="btn primary" id="timerStartBtn">▶ INICIAR</button><button class="btn ghost" id="timerPauseBtn">Ⅱ PAUSAR</button><button class="btn ghost" id="timerResetBtn">↻ ZERAR</button></div><div class="muted small">O cronômetro funciona enquanto esta página estiver aberta.</div></div>
+      <div class="section-head compact"><div><div class="eyebrow">RANK E · PROTOCOLO INICIAL</div><h2>Treino sugerido</h2></div></div>
+      <div class="exercise-list">
+        <label class="exercise panel"><input type="checkbox" data-ex="warm"><span><b>Aquecimento leve</b><small>3–5 min · marchar no lugar e mobilidade</small></span></label>
+        <label class="exercise panel"><input type="checkbox" data-ex="squat"><span><b>Agachamento controlado</b><small>2 séries de 8–12 repetições</small></span></label>
+        <label class="exercise panel"><input type="checkbox" data-ex="wall"><span><b>Flexão na parede</b><small>2 séries de 6–10 repetições</small></span></label>
+        <label class="exercise panel"><input type="checkbox" data-ex="bridge"><span><b>Ponte de glúteos</b><small>2 séries de 8–12 repetições</small></span></label>
+        <label class="exercise panel"><input type="checkbox" data-ex="cool"><span><b>Volta à calma</b><small>2–3 min · respiração e alongamento confortável</small></span></label>
+      </div>
+      <button class="btn primary full" id="finishWorkoutBtn">✓ FINALIZAR TREINO · +30 XP</button>
+      <div class="notice"><span>⚠</span><p>Interrompa se sentir dor, tontura ou falta de ar fora do normal. Adapte as repetições ao seu nível.</p></div>
+    </section>
+
+    <section class="view" id="view-progress">
+      <div class="section-head"><div><div class="eyebrow">HUNTER RECORD</div><h2>Evolução</h2></div><button class="text-btn" id="exportBtn">Exportar backup ↓</button></div>
+      <div class="panel chart-panel"><div class="stat-label">HISTÓRICO DE PESO</div><div id="weightChart" class="weight-chart"><div class="empty-state">Registre seu peso para criar o gráfico.</div></div><div class="muted small">O peso pode variar naturalmente. Observe tendências ao longo das semanas.</div></div>
+      <div class="panel record-panel"><div class="stat-label">NOVO REGISTRO</div><form id="weightForm" class="inline-form"><input id="weightInput" type="number" min="20" max="350" step="0.1" placeholder="Peso em kg" required><button class="btn primary" type="submit">Salvar</button></form><div id="weightHistory" class="history-list"></div></div>
+      <div class="panel record-panel"><div class="stat-label">CALCULADORA DE CALORIAS · ESTIMATIVA</div><p class="muted small">Estimativa geral, não uma prescrição médica. Para menores de 18 anos, não use esta estimativa para restringir alimentação.</p><form id="calorieForm" class="form-grid"><label>Idade<input id="ageInput" type="number" min="13" max="100" placeholder="anos" required></label><label>Sexo usado na fórmula<select id="sexInput"><option value="male">Masculino</option><option value="female">Feminino</option></select></label><label>Altura (cm)<input id="calHeightInput" type="number" min="100" max="230" value="180" required></label><label>Peso (kg)<input id="calWeightInput" type="number" min="20" max="350" step="0.1" value="82" required></label><label class="full-span">Atividade<select id="activityInput"><option value="1.2">Sedentário</option><option value="1.375">Levemente ativo</option><option value="1.55">Moderadamente ativo</option><option value="1.725">Muito ativo</option></select></label><button class="btn primary full-span" type="submit">Calcular estimativa</button></form><div id="calorieResult" class="calorie-result" hidden></div></div>
+    </section>
+
+    <section class="view" id="view-inventory">
+      <div class="section-head"><div><div class="eyebrow">REWARD SHOP</div><h2>Inventário de recompensas</h2></div><span class="rank">MOEDAS: <b id="coinText">0</b></span></div>
+      <div class="panel"><p class="muted">Crie recompensas pessoais e defina o custo em moedas. Você ganha moedas ao concluir missões. Escolha recompensas saudáveis e realistas.</p><form id="rewardForm" class="form-grid"><label class="full-span">Nome da recompensa<input id="rewardNameInput" maxlength="50" placeholder="Ex.: 30 min de jogo" required></label><label>Custo em moedas<input id="rewardCostInput" type="number" min="1" max="9999" value="50" required></label><button class="btn primary" type="submit">＋ Criar recompensa</button></form></div>
+      <div id="rewardList" class="reward-list"></div>
+    </section>
+    <footer class="footer">SYSTEM AWAKENING <span>·</span> BETA 1.5 <span>·</span> DADOS SALVOS NESTE DISPOSITIVO</footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="levelOverlay" class="level-overlay" hidden><div class="level-box"><div class="level-sigil">↑</div><div class="eyebrow">SYSTEM NOTIFICATION</div><h2>LEVEL UP</h2><p id="levelUpText">NÍVEL 2 ALCANÇADO</p><button class="btn primary" id="levelCloseBtn">CONTINUAR</button></div></div>
+  <script src="app.js"></script>
+</body>
+</html>

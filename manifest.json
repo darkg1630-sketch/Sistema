@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "SYSTEM AWAKENING — Personal Evolution Protocol",
+  "short_name": "System Awakening",
+  "description": "Sistema RPG pessoal para missões, treino e evolução física.",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#060914",
+  "theme_color": "#0a0e1a",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
